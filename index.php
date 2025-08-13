@@ -25,18 +25,31 @@
     <br>
 
     <hr>
-    <h2>Form Submission</h2>
+    <h2>result: </h2>    
     <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $name  = $_POST['username'] ;
-        $color = $_POST['color'] ;
-        ?>
-        <h1>Hello, <?php echo ($name); ?>!</h1>
-        <p style="color: <?php echo htmlspecialchars($color); ?>;">
-            Your favorite color is <?php echo ($color); ?>.
-        </p>
-        <?php
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name  = $_POST['username'] ; 
+    $color = $_POST['color'] ; 
+    header(
+        "Location: ?page=result&name=" . urlencode($name) . "&color=" . urlencode($color),
+        true,
+        303 
+    );
+    exit;
+}
+
+if (isset($_GET['page']) && $_GET['page'] === 'result') {
+    $name  = $_GET['name'];
+    $color = $_GET['color'];
+    ?>
+    <h1>Hello, <?php echo ($name); ?>!</h1>
+    <p style="color: <?php echo htmlspecialchars($color); ?>;">
+        Your favorite color is <?php echo ($color); ?>.
+    </p>
+    <p><a href="?">Hide result</a></p>
+    <?php
+    exit;
+}
     ?>
 
 </body>
