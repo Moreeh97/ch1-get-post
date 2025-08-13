@@ -1,25 +1,43 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ch1-get-post</title>
 </head>
 <body>
-    
-<?php
-echo "Current Server Time: " . date("Y-m-d H:i:s");
-echo "<br>";
+    <?php
+    $currentTime = date("Y-m-d H:i:s");
+    ?>
+    <h2>Current Server Time: <?php echo $currentTime; ?></h2>
 
-?>
-    <form action="handle-form.php" method="POST">
-        <label>Name:</label>
+    <form action="" method="POST">
+        <label>name:</label>
         <input type="text" name="username" required>
-        <label>Favorite Color:</label>
+        <br><br>
+        <label> color:</label>
         <input type="text" name="color" required>
-        <button type="submit">Submit</button>
+        <br><br>
+        <button type="submit">send</button>
+        <button type="reset">reset</button>
     </form>
+
+    <br>
+
+    <hr>
+    <h2>Form Submission</h2>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name  = $_POST['username'] ;
+        $color = $_POST['color'] ;
+        ?>
+        <h1>Hello, <?php echo ($name); ?>!</h1>
+        <p style="color: <?php echo htmlspecialchars($color); ?>;">
+            Your favorite color is <?php echo ($color); ?>.
+        </p>
+        <?php
+    }
+    ?>
+
 </body>
 </html>
-
